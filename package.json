@@ -1,0 +1,18 @@
+{
+  "name": "dashboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "run-script-os",
+    "start:darwin:linux": "browser-sync start --startPath index.html --server --files '**/*.css, **/*.html, **/*.js, !node_modules/**/*' --directory --port 7777 --browser 'google chrome'"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.27.5",
+    "run-script-os": "^1.1.6",
+    "standard": "^16.0.3"
+  },
+  "dependencies": {}
+}
