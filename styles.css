@@ -14,14 +14,37 @@ body {
   color: white;
 }
 
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+
 #page-container {
+  padding: 15px;
   height: 100vh;
   background: lightgray;
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.dynamic-information-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.time-section {
+  margin: 0 auto;
+}
+
+.static-information-section {
+  /* align-self: */
 }
 
 .text--shadow {
-  text-shadow: 1px 2px 3px #474747;
+  text-shadow: 1px 1px 4px #aaa;
 }
