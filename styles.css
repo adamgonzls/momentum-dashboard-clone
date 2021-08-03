@@ -20,6 +20,15 @@ h3 {
   margin: 0;
 }
 
+h1 {
+  font-size: 2rem;
+}
+
+ol,
+ul {
+  margin-top: 0;
+}
+
 #page-container {
   padding: 15px;
   height: 100vh;
@@ -37,12 +46,30 @@ h3 {
   justify-content: space-between;
 }
 
-.time-section {
+#crypto-info__container {
+  font-size: 1.3rem;
+}
+
+.crypto-info__row {
+  display: flex;
+  align-items: center;
+}
+
+.crypto-info__image {
+  margin-right: 5px;
+}
+
+.time__container {
   margin: 0 auto;
 }
 
 .static-information-section {
   /* align-self: */
+}
+
+.no-bullets {
+  padding-left: 0;
+  list-style: none;
 }
 
 .text--shadow {
