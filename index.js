@@ -1,8 +1,10 @@
 const pageContainer = document.getElementById('page-container')
 const cryptoInfoContainer = document.getElementById('crypto-info__container')
+const weatherInfoContainer = document.getElementById('weather-info__container')
 const timeDisplay = document.getElementById('time__display')
 const unSplashAPI = 'https://apis.scrimba.com/unsplash/photos/'
 const coinGeckoAPI = 'https://api.coingecko.com/api/v3/'
+const openWeatherAPI = 'https://apis.scrimba.com/openweathermap/data/2.5/weather'
 
 fetch(`${unSplashAPI}random?orientation=landscape&query=nature`)
   .then(res => res.json())
@@ -19,14 +21,14 @@ fetch(`${unSplashAPI}random?orientation=landscape&query=nature`)
 fetch(`${coinGeckoAPI}coins/dogecoin`)
   .then(res => {
     if (!res.ok) {
-      cryptoInfo.textContent = 'Data not available at this time'
+      cryptoInfoContainer.innerHTML = '<span>Data not available at this time</span>'
       throw Error('Something went wrong')
     }
     return res.json()
   })
   .then(data => {
     cryptoInfoContainer.innerHTML = `
-    <div id="crypto-info__details" class="crypto-info__row">
+    <div id="crypto-info__details" class="info-row">
       <img class="crypto-info__image" src="${data.image.small}" alt="${data.name}" />
       <span>${data.name}</span>
     </div>
@@ -45,3 +47,47 @@ function displayCurrentTime () {
 }
 
 setInterval(displayCurrentTime)
+
+if (!navigator.geolocation) {
+  console.error('Your browser doesn\'t support Geolocation')
+}
+navigator.geolocation.getCurrentPosition(position => {
+  // console.log(position)
+  const {
+    latitude,
+    longitude
+  } = position.coords
+  fetch(`${openWeatherAPI}?lat=${latitude}&lon=${longitude}&units=imperial`)
+    .then(res => {
+      if (!res.ok) {
+        weatherInfoContainer.innerHTML = '<span>Weather data not available at this time</span>'
+        throw Error('Weather data not available')
+      }
+      return res.json()
+    })
+    .then(data => {
+      console.log(data)
+      const weatherDescription = data.weather[0].description.charAt(0).toUpperCase() + data.weather[0].description.slice(1)
+      const cityName = data.name
+      const tempF = Math.round(data.main.temp)
+      const tempC = Math.round((5 / 9) * (tempF - 32))
+      weatherInfoContainer.innerHTML = `
+      <div class="info-row">
+        <img class="weather-info__image" src='http://openweathermap.org/img/wn/${data.weather[0].icon}.png' />
+        <span class='text--shadow'>${weatherDescription}</span>
+      </div>
+      <span class='text--shadow'>${cityName}</span>
+      <span class='text--shadow'>${tempF}&#8457;</span>
+      <span class='text--shadow'>${tempC}&#8451;</span>`
+    })
+    .catch(err => console.error(err))
+})
+// function onSuccess (position) {
+//   const {
+//     latitude,
+//     longitude
+//   } = position.coords
+
+//   // message.classList.add('success')
+//   console.log(`Your location: (${latitude},${longitude})`)
+// }
