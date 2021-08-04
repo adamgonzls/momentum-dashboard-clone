@@ -50,13 +50,23 @@ ul {
   font-size: 1.3rem;
 }
 
-.crypto-info__row {
+.info-row {
   display: flex;
   align-items: center;
 }
 
 .crypto-info__image {
   margin-right: 5px;
+}
+
+#weather-info__container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.weather-info__image {
+  height: 30px;
 }
 
 .time__container {
